@@ -16,6 +16,12 @@ class StoresController < ApplicationController
   # GET /stores/1
   # GET /stores/1.json
   def show
+    @hash = Gmaps4rails.build_markers(@store) do |store, marker|
+      marker.lat store.latitude
+      marker.lng store.longitude
+      marker.infowindow store.description
+      marker.json({ title: store.title}) #Adds'title' attribute in the source html
+    end
   end
 
   # GET /stores/new
